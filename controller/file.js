@@ -67,7 +67,19 @@ const uploadFile = (req, res) => {
 };
 
 const generateSharableLink = async (req, res) => {
-  const shareableLink = `/files/download/${req.params.fileId}`;
+  const fileId = req.params.fileId;
+  if (!fileId) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Entre the file id" });
+  }
+  const fileData = await fileModel.findById(fileId);
+  if (!fileData) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Enter vaild data" });
+  }
+  const shareableLink = `/files/download/${fileId}`;
   res.status(200).json({
     sucess: true,
     message: "generated successfully ",
