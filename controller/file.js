@@ -10,9 +10,14 @@ const fileModel = require("../model/file");
 dotenv.config();
 
 const transpoter = nodemailer.createTransport({
-  host: "127.0.0.1",
-  port: 1025,
+  service: "Gmail",
+  host: "smtp.gmail.com",
+  port: 465,
   secure: false,
+  auth: {
+    user: "kamalbisht819@gmail.com",
+    pass: "wtsm fesn dspb fcoi",
+  },
 });
 
 const storage = multer.diskStorage({
